@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Weather App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  </head>
+  <body>
+    <style>
+      /* Default styles (Light Mode) */
+      body {
+          background-color: #ffffff;
+          color: #333333;
+      }
+  
+      .nav-link {
+          color: #007bff; /* Bootstrap's default link color */
+      }
+  
+      /* ... other light mode styles ... */
+  
+      /* Dark Mode styles */
+      body.dark-mode {
+          background-color: #181818; /* Almost black background */
+          color: #e0e0e0;  /* Light gray text for contrast against the dark background */
+      }
+  
+      body.dark-mode .nav-link {
+          color: #a6d2ff; /* Lightened link color for better visibility in dark mode */
+      }
+  
+      /* ... other dark mode specific styles ... */
+  </style>
+  
+   
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#"><b>Weather App&#9728;</b></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Other Cities</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                 
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#" data-city="Delhi">Delhi</a></li>
+                  <li><a class="dropdown-item" href="#" data-city="New York">New York</a></li>
+                  <li><a class="dropdown-item" href="#" data-city="London">London</a></li>
+              </ul>
+              
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="about.html">About this App</a>
+            </li>
+            <li><button id="darkModeToggle">Toggle Dark Mode</button>
+            </li>
+            
+            </ul>
+            <form class="d-flex" role="search">
+              <input id="city" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit" id="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+      <div.container>
+        <h1 class="my-4 text-center">Weather for <span id="cityName"></span></h1>
+        <main>
+           
+            <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+              <div class="col">
+                <div class="card mb-4 rounded-3 shadow-sm border-primary">
+                  <div class="card-header py-3 text-bg-primary border-primary">
+                    <h4 class="my-0 fw-normal">Temperature</h4>
+                  </div>
+                  <div class="card-body">
+                    <h1 class="card-title pricing-card-title"><span id="temp2"></span><small class="text-body-secondary fw-light"> °C</small></h1>
+                    <ul class="list-unstyled mt-3 mb-4">
+                      <li>Temperature :<span id="temp"></span></li>
+                      <li>Min Temp :<span id="min_temp"></span></li>
+                      <li>Max Temp :<span id="max_temp"></span></li>
+                     
+                     
+                    </ul>
+                  
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card mb-4 rounded-3 shadow-sm border-primary">
+                  <div class="card-header py-3 text-bg-primary border-primary">
+                    <h4 class="my-0 fw-normal">Humidity info</h4>
+                  </div>
+                  <div class="card-body">
+                    <h1 class="card-title pricing-card-title"><span id="humidity2"></span><small class="text-body-secondary fw-light"> %</small></h1>
+                    <ul class="list-unstyled mt-3 mb-4">
+                        
+                        <li> Feels Like:<span id="feels_like"></span></li>
+                        <li> Humidity:<span id="humidity"></span></li>
+                    </ul>
+                    
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card mb-4 rounded-3 shadow-sm border-primary">
+                  <div class="card-header py-3 text-bg-primary border-primary">
+                    <h4 class="my-0 fw-normal">Wind Speed</h4>
+                  </div>
+                  <div class="card-body">
+                    <h1 class="card-title pricing-card-title"><span id="wind_speed2"></span><small class="text-body-secondary fw-light"> km/hr</small></h1>
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li> Wind Speed:<span id="wind_speed"></span></li>
+                        <li> Sunrise:<span id="sunrise"></span></li>
+                        <li> Sunset:<span id="sunset"></span></li>
+                    </ul>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+        
+            <h2 class="display-6 text-center mb-4"><b>Weather for other Cities</b></h2>
+        
+            <div class="table-responsive">
+              <table class="table text-center">
+                <thead>
+                  <tr>
+                    <th style="width: 10%;"></th>
+                    <th style="width: 8%;">Cloud_pct</th>
+                    <th style="width: 8%;">Feels_like</th>
+                    <th style="width: 8%;">Humidity</th>
+                    <th style="width: 8%;">Max_temp</th>
+                    <th style="width: 8%;">Min_temp</th>
+                    <th style="width: 8%;">Sunrise</th>
+                    <th style="width: 8%;">Sunset</th>
+                    <th style="width: 8%;">Temp</th>
+                    <th style="width: 8%;">Wind_degrees</th>
+                    <th style="width: 8%;">Wind_speed</th>
+                                    
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row" class="text-start" >Kolkata</th>
+                    <td><span id="kolkata_cloud_pct"></span></td>
+                    <td><span id="kolkata_feels_like"></span></td>
+                    <td><span id="kolkata_humidity"></span></td>
+                    <td><span id="kolkata_min_temp"></span></td>
+                    <td><span id="kolkata_max_temp"></span></td>
+                    <td><span id="kolkata_sunrise"></span></td>
+                    <td><span id="kolkata_sunset"></span></td>
+                    <td><span id="kolkata_temp"></span></td>
+                    <td><span id="kolkata_wind_degrees"></span></td>
+                    <td><span id="kolkata_wind_speed"></span></td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="text-start">Chennai</th>
+                    <td><span id="chennai_cloud_pct"></span></td>
+                    <td><span id="chennai_feels_like"></span></td>
+                    <td><span id="chennai_humidity"></span></td>
+                    <td><span id="chennai_min_temp"></span></td>
+                    <td><span id="chennai_max_temp"></span></td>
+                    <td><span id="chennai_sunrise"></span></td>
+                    <td><span id="chennai_sunset"></span></td>
+                    <td><span id="chennai_temp"></span></td>
+                    <td><span id="chennai_wind_degrees"></span></td>
+                    <td><span id="chennai_wind_speed"></span></td>
+                  </tr>
+                </tbody>
+        
+                <tbody>
+                  <tr>
+                    <th scope="row" class="text-start">Mumbai</th>
+                    <td><span id="mumbai_cloud_pct"></span></td>
+                    <td><span id="mumbai_feels_like"></span></td>
+                    <td><span id="mumbai_humidity"></span></td>
+                    <td><span id="mumbai_min_temp"></span></td>
+                    <td><span id="mumbai_max_temp"></span></td>
+                    <td><span id="mumbai_sunrise"></span></td>
+                    <td><span id="mumbai_sunset"></span></td>
+                    <td><span id="mumbai_temp"></span></td>
+                    <td><span id="mumbai_wind_degrees"></span></td>
+                    <td><span id="mumbai_wind_speed"></span></td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="text-start">Bangalore</th>
+                    <td><span id="bangalore_cloud_pct"></span></td>
+                    <td><span id="bangalore_feels_like"></span></td>
+                    <td><span id="bangalore_humidity"></span></td>
+                    <td><span id="bangalore_min_temp"></span></td>
+                    <td><span id="bangalore_max_temp"></span></td>
+                    <td><span id="bangalore_sunrise"></span></td>
+                    <td><span id="bangalore_sunset"></span></td>
+                    <td><span id="bangalore_temp"></span></td>
+                    <td><span id="bangalore_wind_degrees"></span></td>
+                    <td><span id="bangalore_wind_speed"></span></td>
+                  </tr>
+                 
+                </tbody>
+              </table>
+            </div>
+          </main>
+      </div.container>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+</body>
+</html>
